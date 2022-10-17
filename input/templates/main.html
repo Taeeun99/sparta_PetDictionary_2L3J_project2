@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<header>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+</header>
+
+
+<style>
+    body {
+        background-color:#EFDEEE;
+        text-align:center;  
+        height: 100%; 
+        margin: 0px;
+      }
+      #jojo{  
+        margin: 14px auto;
+        position: relative;
+        height:510px;
+        width:680px;
+      }
+      #jojo div{position:absolute;}
+      #jojo div::before, #jojo div::after {
+        content:'';
+        position:absolute;
+        display:block;
+      }
+      .head {
+        width:155px;
+        height:278px;
+        background-image: linear-gradient(90deg, white 25px,  #F19D2C 25px);
+        border-bottom-right-radius:135px;
+        top:117px;
+        right:199px;
+      }
+      .head::before {
+        width: 54px;
+        height:54px;
+        border-bottom-right-radius:54px;
+        background-image: radial-gradient(circle at 60px 0px, #404041 30px, white 30px);  
+        top:46px;
+        left:154px;
+      }
+      .head::after{
+        width:64px;
+        height:2px;
+        background-color:#8C5A47;
+        top:100px;
+        left:91px;
+      }
+      .face{
+        width:12px;
+        height:12px;
+        border-radius:50%;
+        background-color:#404041;
+        box-shadow: 48px 0 #404041;
+        top:155px;
+        left:387px;
+      }
+      .face::before{
+        width:20px;
+        height:10px;
+        border-radius:10px;
+        background-color:#D1733A;
+        box-shadow:43px 0 #D1733A;
+        top:-14px;
+        left:-3px;
+      }
+      .face::after{
+        width:22px;
+        height:23px;
+        background-color:#F16258;
+        border-radius: 0 0 23px 23px;
+        top:64px;
+        left:30px;
+        animation:tounge 1s infinite ease;
+        -o-animation:tounge 1s infinite ease;
+        -ms-animation:tounge 1s infinite ease;
+        -moz-animation:tounge 1s infinite ease;
+        -webkit-animation:tounge 1s infinite ease;
+      }
+      @keyframes tounge {
+        50% {height:18px;}
+      }
+      .back-paws{
+        width:507px;
+        height:18px;
+        background-color:#3F3856;
+        border-radius:50%;
+        bottom:50px;
+        left:22px;
+      }
+      .back-paws::before{
+        width:53px;
+        height:106px;
+        border-radius:60px;
+        background-image: linear-gradient(#D1733A 80px, #D9DFF1 80px);
+        left:120px;
+        bottom:13px;
+      }
+      .back-paws::after{
+        width:53px;
+        height:106px;
+        border-radius:60px;
+        background-image: linear-gradient(#D1733A 80px, #D9DFF1 80px);
+        left:350px;
+        bottom:13px;
+      }
+      .body{
+        width:277px;
+        height:156px;
+        border-bottom-left-radius:132px;
+        background-image: linear-gradient(#F19D2C 130px, #D1733A 130px);
+        bottom:115px;
+        left:49px;
+      }
+      .body::before{
+        width:50px;
+        height:22px;
+        background-image:linear-gradient( 90deg, white 22px, #F19D2C 22px);
+        border-bottom-left-radius:22px;
+        left:-26px;
+        animation: tail 300ms infinite ease;
+        -o-animation: tail 300ms infinite ease;
+        -ms-animation: tail 300ms infinite ease;
+        -moz-animation: tail 300ms infinite ease;
+        -webkit-animation: tail 300ms infinite ease;
+      }
+      @keyframes tail{
+        50%{transform:rotate(15deg);}
+      }
+      .paws{
+        width:53px;
+        height:106px;
+        border-radius:60px;
+        background-image: linear-gradient(#F19D2C 80px, white 80px);
+        left:100px;
+        bottom:62px;
+      }
+      .paws::after{
+        width:53px;
+        height:106px;
+        border-radius:60px;
+        background-image: linear-gradient(#F19D2C 80px, white 80px);
+        left: 226px;
+      }
+      .ears::before{
+        width:38px;
+        height:38px;
+        background-color:#c97c47;
+        border-top-right-radius: 58px;
+        box-shadow: 0px -8px 0 8px #F19D2C; 
+        left:334px;
+        top:80px;
+      }
+      .ears::after{
+         width:38px;
+        height:38px;
+        background-color:#c97c47;
+        border-top-left-radius: 58px;
+        box-shadow: 0px -8px 0 8px #F19D2C;
+        left:435px;
+        top:80px;
+      }
+      .heart{
+        width: 88px;
+        height: 88px;
+        border-radius: 88px 88px 88px 0;
+        background-color:white;
+        right:27px;
+        top:70px;
+      }
+      .heart::before{
+        width: 30px;
+        height: 30px; 
+        background-color:#F16258;
+        transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        top:30px;
+        left:30px;
+      }
+      .heart::after{
+        width: 30px;
+        height: 30px; 
+        background-color:#F16258;
+        top:19px;
+        left:19px;
+        border-radius:30px;
+        box-shadow: 15px 15px #F16258;
+        transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+      .fur{
+        width:40px;
+        height:20px;
+        background-color:white;
+        border-radius: 0 0 24px 24px;
+        box-shadow:3px -14px white,
+          33px 70px #F19D2C,
+          30px 84px #F19D2C;
+        top:180px;
+        left:308px;
+      }
+      .fur::before{
+        width:40px;
+        height:20px;
+        background-color: #F19D2C;
+        border-radius:  24px 24px 0 0;
+        box-shadow:3px -14px  #F19D2C;
+        top:96px;
+        left:140px;
+      }
+      .fur::after{
+        width:20px;
+        height:40px;
+        background-color: #F19D2C;
+        border-radius:  0 40px 40px 0;
+        box-shadow:18px -7px  #F19D2C;
+        top:46px;
+        left:-210px;
+      }
+      
+      button {
+        margin: 80px;
+      }
+
+      .custom-btn {
+        width: 130px;
+        height: 40px;
+        color: #fff;
+        border-radius: 5px;
+        padding: 10px 25px;
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+         box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+         7px 7px 20px 0px rgba(0,0,0,.1),
+         4px 4px 5px 0px rgba(0,0,0,.1);
+        outline: none;
+      }
+
+      .btn-12{
+        position: relative;
+        right: 20px;
+        bottom: 20px;
+        border:none;
+        box-shadow: none;
+        width: 130px;
+        height: 40px;
+        line-height: 42px;
+        -webkit-perspective: 230px;
+        perspective: 230px;
+      }
+      .btn-12 span {
+        background: rgb(0,172,238);
+      background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+        display: block;
+        position: absolute;
+        width: 130px;
+        height: 40px;
+        box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+         7px 7px 20px 0px rgba(0,0,0,.1),
+         4px 4px 5px 0px rgba(0,0,0,.1);
+        border-radius: 5px;
+        margin:0;
+        text-align: center;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-transition: all .3s;
+        transition: all .3s;
+      }
+      .btn-12 span:nth-child(1) {
+        box-shadow:
+         -7px -7px 20px 0px #fff9,
+         -4px -4px 5px 0px #fff9,
+         7px 7px 20px 0px #0002,
+         4px 4px 5px 0px #0001;
+        -webkit-transform: rotateX(90deg);
+        -moz-transform: rotateX(90deg);
+        transform: rotateX(90deg);
+        -webkit-transform-origin: 50% 50% -20px;
+        -moz-transform-origin: 50% 50% -20px;
+        transform-origin: 50% 50% -20px;
+      }
+      .btn-12 span:nth-child(2) {
+        -webkit-transform: rotateX(0deg);
+        -moz-transform: rotateX(0deg);
+        transform: rotateX(0deg);
+        -webkit-transform-origin: 50% 50% -20px;
+        -moz-transform-origin: 50% 50% -20px;
+        transform-origin: 50% 50% -20px;
+      }
+      .btn-12:hover span:nth-child(1) {
+        box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+         7px 7px 20px 0px rgba(0,0,0,.1),
+         4px 4px 5px 0px rgba(0,0,0,.1);
+        -webkit-transform: rotateX(0deg);
+        -moz-transform: rotateX(0deg);
+        transform: rotateX(0deg);
+      }
+      .btn-12:hover span:nth-child(2) {
+        box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+         7px 7px 20px 0px rgba(0,0,0,.1),
+         4px 4px 5px 0px rgba(0,0,0,.1);
+       color: transparent;
+        -webkit-transform: rotateX(-90deg);
+        -moz-transform: rotateX(-90deg);
+        transform: rotateX(-90deg);
+      }
+
+      h1{
+        padding-right: 700px;
+        
+        
+      }
+    
+    
+      
+</style>
+
+<script>
+
+   
+</script>
+
+
+<body>
+    <h1 >PetDirectory</h1>
+    <div id="jojo">
+        <div class="back-paws"></div>
+        <div class="head"></div>
+        <div class="face"></div>  
+        <div class="ears"></div>
+        <div class="body"></div>
+        <div class="paws"></div>  
+        <div class="fur"></div>
+        <div class="heart"></div>
+     </div>
+    
+     <button type="button" onClick="location.href='/input';" class="custom-btn btn-12"><span >Click!</span><span>Start!</span></button>
+    
+</body>
+
+
+</html>
