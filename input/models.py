@@ -13,7 +13,8 @@ class InputModel(models.Model):
 
 class ResearchModel(models.Model):
     # 정확도
-    correct = models.BooleanField
+
+    correct = models.BooleanField(default=False)
     # 검색된 품종 이름
     pet_result = models.CharField(max_length=20)
     # 품종이름이 다를때

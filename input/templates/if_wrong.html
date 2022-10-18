@@ -113,16 +113,20 @@
         
         <div class="wrap">
             <div class="search">
-               <input type="text" class="searchTerm" placeholder="What are you looking for?">
-               <button type="submit" class="searchButton">
-                 <i class="fa fa-search"></i>
-              </button>
+                <form action="/wrong/" method="POST">
+                    {% csrf_token %}
+                    <input type="text" class="searchTerm" placeholder="What are you looking for?" name="keyword">
+                    <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form> 
             </div>
         </div>
         
 
         <div class="btn-select">
             <h4>구글 검색 결과</h4>
+            <a href="{{ search_link }}">Google 검색 결과</a>
             
             <button type="button" class="btn btn-outline-secondary" onClick="location.href='/graph';">확인</button>
             
