@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from . import search
+
+
+
 
 from .models import InputModel, ResearchModel
 
@@ -16,6 +20,7 @@ def input(request):
 
 
 def output(request):
+
 
     img = request.FILES.get("imgfile")
     InputModel.objects.create(imgfile=img)  # 이미지 수신 후 저장

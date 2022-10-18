@@ -98,6 +98,11 @@
         font-size:18px;
         font-weight: bold;
     }
+    .post-image{
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+    }
 
     
 
@@ -114,14 +119,12 @@
 
 <body>
     <main>
+
         <h2>검색하신 {{ top_category }}은 {{ low_category }}입니다.</h2>
         <input id="toggle" type="checkbox" checked>
+
         
-        <div id="expand">
-          <section>
-            <p>mew</p>
-          </section>
-        </div>
+        <img src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/quick-actions/remove-background-before-qa1.png" class="post-image" alt="">
         <section>
           <h3>관련 내용</h3>
           <a href="{{ search_link }}">Google 검색 결과</a>
