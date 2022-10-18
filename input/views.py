@@ -1,8 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from django.http import HttpResponse
 
 # Create your views here.
-def output(request): # 이미지 분석 라벨을 키워드로 구글 검색
 
+def main(request):
+    return render(request, 'main.html')
+    
+
+def input(request):
+    return render(request, 'input.html')
+
+def output(request):
     if request.method = 'GET':
         keyword = Input.objects.get('pet') # DB에서 이미지 분석 라벨값 호출
         search_link = "https://www.google.com/search?q="+keyword # 구글 검색 url
@@ -22,8 +30,9 @@ def output(request): # 이미지 분석 라벨을 키워드로 구글 검색
         elif request.POST.get('correct') == 'no': # 정확도 설문 답변이 no라면
             Research.objects.create(correct = False) # 
             return redirect('/') # 재검색 페이지로 연결
-        
 
+def if_worng(request):
+    return render(request, 'if_worng.html')
 
-
-
+def graph(request):
+    return render(request, 'accuracy_graph.html')
