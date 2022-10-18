@@ -34,15 +34,15 @@ def output(request):
         return render(request, 'output.html', context)
 
 
-def if_worng(request):
+def if_wrong(request):
     if request.method == 'GET': # 정확도 설문 답변이 no라면
         ResearchModel.objects.create(correct=False)
-        return render(request, 'if_worng.html')
+        return render(request, 'if_wrong.html')
         
     elif request.method == 'POST': # 문자열 입력으로 재검색
         keyword = request.POST.get('keyword')
         search_link = "https://www.google.com/search?q="+keyword 
-        return render(request, 'if_worng.html', {'search_link':search_link})
+        return render(request, 'if_wrong.html', {'search_link':search_link})
 
 
 def graph(request):
