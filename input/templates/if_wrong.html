@@ -16,10 +16,7 @@
     @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
     body {
-        
         display: flex;
-        height: 100vh;
-        width: 100vw;
         justify-content: center;
         flex-wrap: nowrap;
         align-items: center;
@@ -27,6 +24,10 @@
         background: #EFDEEE;
     }
     main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
         background-color: white;
         width: 800px;
         height: auto;
@@ -102,6 +103,14 @@
         font-weight: bold;
     }
 
+    .search_info{
+        margin-top:20px;
+        padding:20px;
+        border: dotted 5px;
+    }
+    .text_info{
+
+    }
     
 
     
@@ -119,13 +128,14 @@
 <body>
     <main>
         <div class="container">
-  
+            {% if not name %}
             <section>
                 <h2>Search Pet</h2>
-                    <form>
+                    <form method="POST" active="/wrong/">
+                        {% csrf_token %}
                         <div class="wrap" style="border:1px solid black">
                             <div class="search">
-                               <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                               <input type="text" class="searchTerm" placeholder="What are you looking for?" name="search">
                                <button type="submit" class="searchButton">
                                  <i class="fa fa-search"></i>
                               </button>
@@ -135,20 +145,38 @@
                         
                     </form>
             </section>
+            {% endif %}
             
         </div>
-        <img src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/quick-actions/remove-background-before-qa1.png" class="post-image" alt="">
-        <section style="padding:30px">
-            <h3>관련 내용</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porta non turpis faucibus lobortis. Curabitur non eros rutrum, gravida felis non, luctus velit. Ut commodo congue velit feugiat lobortis. Etiam nec dolor quis nulla bibendum blandit vitae nec enim. Maecenas id dignissim erat. Aenean ac mi nec ante venenatis interdum quis vel lacus.
-            </p>
-            <p>Aliquam ligula est, aliquet et semper vitae, elementum eget dolor. In ut dui id leo tristique iaculis eget a dui. Vestibulum cursus, dolor sit amet lacinia feugiat, turpis odio auctor nisi, quis pretium dui elit at est. Pellentesque lacus risus, vulputate sed gravida eleifend, accumsan ac ante. Donec accumsan, augue eu congue condimentum, erat magna luctus diam, adipiscing bibendum sem sem non elit.</p>
-        </section>
+        {% if name %}
+            <img src="{{ img }}" class="post-image" alt="이미지 없음">
+        {% else %}
+            <div class="btn-select">찾으셨던 pet 종을 입력하고 버튼을 눌러주세요</div>
+        {% endif %}
 
-        <div class="btn-select">
-            <h4>정확도 확인하기</h4>
-            <button type="button" class="btn btn-outline-info" onClick="location.href='/graph';">확인</button>
-        </div>
+        {% if name%}
+        <section style="padding:30px">
+            <h2>검색 내용</h2>
+            <hr>
+            
+                <h4>{{ name }}</h4>
+                <div class="search_info">
+                    
+                    <div class="text_info">
+                        {% for data in info %}
+                        <p>{{ data }}</p>
+                        {% endfor %}
+                    
+                    
+                        <p>내용 : {{ text }}</p>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+            <div class="btn-select">
+                <h4>정확도 확인하기</h4>
+                <button type="button" class="btn btn-outline-info" onClick="location.href='/graph';">확인</button>
+            </div>
         
 
     </main>
