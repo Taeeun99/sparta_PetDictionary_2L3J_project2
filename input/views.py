@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
 from .models import InputModel, ResearchModel
+
 
 # Create your views here.
 
@@ -9,10 +11,12 @@ def main(request):
     
 
 def input(request):
+    
     return render(request, 'input.html')
 
 
 def output(request):
+
     img = request.FILES.get("imgfile")
     InputModel.objects.create(imgfile=img)  # 이미지 수신 후 저장
     # 머신러닝 실행 부분
@@ -43,6 +47,10 @@ def if_wrong(request):
         keyword = request.POST.get('keyword')
         search_link = "https://www.google.com/search?q="+keyword 
         return render(request, 'if_wrong.html', {'search_link':search_link})
+
+
+  
+
 
 
 def graph(request):

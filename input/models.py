@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 # Create your models here.
 
@@ -11,6 +13,7 @@ class InputModel(models.Model):
 
 class ResearchModel(models.Model):
     # 정확도
+
     correct = models.BooleanField(default=False)
     # 검색된 품종 이름
     pet_result = models.CharField(max_length=20)
