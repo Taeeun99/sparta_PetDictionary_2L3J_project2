@@ -10,6 +10,16 @@ class InputModel(models.Model):
     imgfile = models.ImageField(null=False, upload_to="input/", blank=False)
     # 품종이름
     pet = models.CharField(max_length=20)
+    
+    img_data = models.CharField('')
+    # 사물인식 파일(base64 인코딩)
+    species = models.CharField('')
+    # 종
+    breed = models.CharField('')
+    # 품종
+    search_link = models.CharField('')
+    # 서치링크
+   
 
 class ResearchModel(models.Model):
     # 정확도
@@ -19,3 +29,6 @@ class ResearchModel(models.Model):
     pet_result = models.CharField(max_length=20)
     # 품종이름이 다를때
     pet_def = models.CharField(max_length=20)
+
+
+    

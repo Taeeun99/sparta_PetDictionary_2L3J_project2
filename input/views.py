@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from . import search
+from . import search, inference
 from .models import InputModel, ResearchModel
 
 
@@ -11,34 +11,27 @@ def main(request):
     
 
 def input(request):
+    if request.method == 'GET':
+        return render(request, 'input.html')
     
-    return render(request, 'input.html')
+    elif request.method == 'POST':
+        '''
+        여기에 inference.py 함수 돌리기
+        
+        InputModel.objects.create
+        '''
+    return redirect('/output')
 
 
 def output(request):
-
-
-    img = request.FILES.get("imgfile")
-    InputModel.objects.create(imgfile=img)  # 이미지 수신 후 저장
-    # 머신러닝 실행 부분
-    # 결과값(정답라벨)을 DB에 저장하는 부분
-    
-    if request.method == 'POST':
-        # keyword = InputModel.objects.get('pet') # DB에서 이미지 분석 라벨값 호출
-        keyword = 'cat-ddd' # DB에서 이미지 분석 라벨값 호출
-        search_link = "https://www.google.com/search?q="+keyword # 구글 검색 url
+    if request.method == 'GET':
+        '''
+        InputModel id로 받아오기
+        '''        
         
-        top_category = str(keyword.split('-')[:1])
-        low_category = str(keyword.split('-')[1:])
-
-        context = {
-            'search_link':search_link,
-            'top_category':top_category.strip("'" "[" "]"),
-            'low_category':low_category.strip("'" "[" "]"),
-        }
-        
+        return render(request, 'output.html', {'img_data':img_data, 'species':species, 'breed':breed, 'search_link':search_link})
     
-        return render(request, 'output.html', context)
+    elif
 
 
 def if_wrong(request):
