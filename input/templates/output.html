@@ -126,11 +126,19 @@
         
         <img src="data:image/jpeg;base64,{{ img_data }}" class="post-image" alt="">
         <section>
-          <h3>관련 내용</h3>
-          <a href="{{ search_link }}">Google 검색 결과</a>
-          <p>Aliquam ligula est, aliquet et semper vitae, elementum eget dolor. In ut dui id leo tristique iaculis eget a dui. Vestibulum cursus, dolor sit amet lacinia feugiat, turpis odio auctor nisi, quis pretium dui elit at est. Pellentesque lacus risus, vulputate sed gravida eleifend, accumsan ac ante. Donec accumsan, augue eu congue condimentum, erat magna luctus diam, adipiscing bibendum sem sem non elit.</p>
+          <h3>검색 결과</h3>
+          <hr>
+          <div style="background-color: F0F0F0;">
+            {% for data in info %}
+            <p>{{ data }}</p>
+            {% endfor %}
+          </div>
+            {{ text }}
+          <a href="{{ search_link }}">자세히 보기</a>
         </section>
-        <form action="/output/" method="POST">
+
+
+        <form action="{% url 'input:output' id %}" method="POST">
             {% csrf_token %}
             <div class="btn-select">
                 <h4>원하시는 품종이 맞으신가요?</h4>
@@ -139,10 +147,8 @@
             </div>
         </form>
         
-          
-      </main>
-      
-</body>
+    </main>
 
+</body>
 
 </html>

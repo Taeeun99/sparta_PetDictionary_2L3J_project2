@@ -20,7 +20,7 @@ def serch_cat(name):
 
     imgs = soup.select('#main_pack > div.sc_new.cs_common_module.case_normal.color_15._pet > div.cm_content_wrap > div > div > div.detail_info > span')
 
-    if not datas or not infos or not imgs:
+    if not datas or not infos or not imgs:  
         search = name
         url = 'https://www.google.com/search?q='
         newUrl = url + quote_plus(search)

@@ -26,27 +26,45 @@ def input(request):
         
         print(output_data['species'], output_data['breed'])
 
-    return redirect('/output')
+    return redirect(f'/output/{my_search.id}')
 
 
-def output(request):
+
+def output(request, id):
+    
     if request.method == 'GET':
         
-        return render(request, 'output.html')
+        my_pet = InputModel.objects.get(id=id)
+        
+        species = my_pet.species
+        breed = my_pet.breed
+        search_link = my_pet.search_link
+        img_data = my_pet.img_data
+
+        search_data = f'{breed} {species}'    
+        context = search.serch_cat(search_data)        
+        
+        info = {
+            'species':species,
+            'breed':breed,
+            'search_link':search_link,
+            'img_data':img_data,
+            'context':context,
+            'id':id,
+        }
+        return render(request, 'output.html', info)
 
     elif request.method == 'POST':
-        print(request.POST)
-        print(request.POST.get('result'))
-      
-        result = request.POST.get('result')
-
+        
+        result = request.POST.get('result') # 검색 정확도 설문 결과
         if result == 'yes':
              ResearchModel.objects.create(correct=True)
              return redirect('/graph')
-
+        
         elif result == 'no':
              ResearchModel.objects.create(correct=False)
              return redirect('/wrong') 
+
 
 
 def if_wrong(request):
