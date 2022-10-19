@@ -18,15 +18,18 @@ def input(request):
         img = request.FILES.get("imgfile")
         my_search = InputModel.objects.create(imgfile=img)
         my_search.save()
-       
+        
         img_loc = my_search.imgfile
         media_loc = 'media/' + str(img_loc)
-
         output_data = inference.inference(media_loc)
-        
-        print(output_data['species'], output_data['breed'])
-
-    return redirect('/output')
+        #모델 저장
+        my_search.img_data = output_data['img_data']
+        my_search.species = output_data['species']
+        my_search.breed = output_data['breed']
+        my_search.search_link = output_data['search_link']
+        my_search.save()
+       
+    return render(request, 'output.html', output_data) 
 
 
 def output(request):
@@ -35,7 +38,7 @@ def output(request):
         InputModel id로 받아오기
         '''        
         #{'img_data':img_data, 'species':species, 'breed':breed, 'search_link':search_link}
-        return render(request, 'output.html')
+        return redirect('/output')
     
     
 
@@ -58,4 +61,4 @@ def if_wrong(request):
 def graph(request):
     if request.method == 'GET':
         ResearchModel.objects.create(correct=True)
-        return render(request, 'accuracy_graph.html',{'data':30})
+        return render(request, 'accuracy_graph.html',{'data':50})
