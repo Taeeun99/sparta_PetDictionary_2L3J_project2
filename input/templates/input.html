@@ -108,14 +108,14 @@
             <h2>반려동물의 이미지를 업로드 해주세요</h2>
 
             
-                <form action="/output/" method="POST" enctype="multipart/form-data" novalidate>
+                <form action="/input/" method="POST" enctype="multipart/form-data" novalidate>
 
                 
                     {% csrf_token %}
                     <div class="mb-3">
                         <input class="form-control" accept='image/*' type="file" onchange="readURL(this);" name="imgfile">                   
                     </div>
-                    <button type="submit" class="btn btn-outline-secondary" onClick="location.href='/output';" >확인하기</button>
+                    <button type="submit" class="btn btn-outline-secondary">확인하기</button>
 
                 </form>
         </section>

@@ -120,11 +120,11 @@
 <body>
     <main>
 
-        <h2>검색하신 {{ top_category }}은 {{ low_category }}입니다.</h2>
+        <h2>검색하신 {{ species }}은 {{ breed }}입니다.</h2>
         <input id="toggle" type="checkbox" checked>
 
         
-        <img src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/quick-actions/remove-background-before-qa1.png" class="post-image" alt="">
+        <img src="data:image/jpeg;base64,{{ img_data }}" class="post-image" alt="">
         <section>
           <h3>관련 내용</h3>
           <a href="{{ search_link }}">Google 검색 결과</a>
