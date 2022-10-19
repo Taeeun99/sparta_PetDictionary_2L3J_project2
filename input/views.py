@@ -47,7 +47,6 @@ def if_wrong(request):
     if request.method == 'POST':
         search_data = request.POST.get("search")
         context=search.serch_cat(search_data)
-
         return render(request, 'if_wrong.html', context)
 
     elif request.method == 'GET':
