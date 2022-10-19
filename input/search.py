@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def serch_cat(name):
 
-    search = '스핑크스고양이'
+    search = name
     url = 'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query='
     newUrl = url + quote_plus(search) +'%20기본정보'
 
@@ -18,15 +18,28 @@ def serch_cat(name):
 
     infos = soup.select('#main_pack > div.sc_new.cs_common_module.case_normal.color_15._pet > div.cm_content_wrap > div > div > div.detail_info > dl > div')
 
+    imgs = soup.select('#main_pack > div.sc_new.cs_common_module.case_normal.color_15._pet > div.cm_content_wrap > div > div > div.detail_info > span' )
 
+    
     for data in datas:
         text = data.select_one('span').text
-        print(text)
-
-    total_data = {}
+   
+    for img in imgs:
+        img_src = img.select_one('img')['src']
+    
+    total_info = []
     for info in infos:
         tage_data = info.select_one('dt').text
         info_data = info.select_one('dd').text
-        total_data[tage_data]=info_data
+        input_data = tage_data + ' : ' + info_data
+        total_info.append(input_data)
+    
+    output_data = {
+        'name' : name,
+        'info' : total_info,
+        'text' : text,
+        'img' : img_src,
+    }
+    
 
-    return print(total_data)
+    return output_data

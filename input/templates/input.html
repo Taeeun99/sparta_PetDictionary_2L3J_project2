@@ -113,10 +113,7 @@
                 
                     {% csrf_token %}
                     <div class="mb-3">
-                        <input style="margin-bottom:15px" type="text" class="form-control" name="test" id="my-title" placeholder="제목">
-                        
-                        <input class="form-control" accept='image/*' type="file" onchange="readURL(this);" name="imgfile"> 
-                        
+                        <input class="form-control" accept='image/*' type="file" onchange="readURL(this);" name="imgfile">                   
                     </div>
                     <button type="submit" class="btn btn-outline-secondary" onClick="location.href='/output';" >확인하기</button>
 
