@@ -31,13 +31,22 @@ def input(request):
 
 def output(request):
     if request.method == 'GET':
-        '''
-        InputModel id로 받아오기
-        '''        
-        #{'img_data':img_data, 'species':species, 'breed':breed, 'search_link':search_link}
+        
         return render(request, 'output.html')
-    
-    
+
+    elif request.method == 'POST':
+        print(request.POST)
+        print(request.POST.get('result'))
+      
+        result = request.POST.get('result')
+
+        if result == 'yes':
+             ResearchModel.objects.create(correct=True)
+             return redirect('/graph')
+
+        elif result == 'no':
+             ResearchModel.objects.create(correct=False)
+             return redirect('/wrong') 
 
 
 def if_wrong(request):

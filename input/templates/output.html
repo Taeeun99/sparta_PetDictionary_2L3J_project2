@@ -130,12 +130,14 @@
           <a href="{{ search_link }}">Google 검색 결과</a>
           <p>Aliquam ligula est, aliquet et semper vitae, elementum eget dolor. In ut dui id leo tristique iaculis eget a dui. Vestibulum cursus, dolor sit amet lacinia feugiat, turpis odio auctor nisi, quis pretium dui elit at est. Pellentesque lacus risus, vulputate sed gravida eleifend, accumsan ac ante. Donec accumsan, augue eu congue condimentum, erat magna luctus diam, adipiscing bibendum sem sem non elit.</p>
         </section>
-
-        <div class="btn-select">
-            <h4>원하시는 품종이 맞으신가요?</h4>
-                <button type="button" class="btn btn-success" onClick="location.href='/graph/';">예</button>
-                <button type="button" class="btn btn-danger" onClick="location.href='/wrong/';">아니요</button>
-        </div>
+        <form action="/output/" method="POST">
+            {% csrf_token %}
+            <div class="btn-select">
+                <h4>원하시는 품종이 맞으신가요?</h4>
+                    <button type="submit" class="btn btn-success" value="yes" name="result">예</button>
+                    <button type="submit" class="btn btn-danger" value="no" name="result">아니요</button>
+            </div>
+        </form>
         
           
       </main>
