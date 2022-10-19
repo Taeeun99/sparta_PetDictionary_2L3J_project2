@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import search, inference
 from .models import InputModel, ResearchModel
@@ -15,11 +15,17 @@ def input(request):
         return render(request, 'input.html')
     
     elif request.method == 'POST':
-        '''
-        여기에 inference.py 함수 돌리기
+        img = request.FILES.get("imgfile")
+        my_search = InputModel.objects.create(imgfile=img)
+        my_search.save()
+       
+        img_loc = my_search.imgfile
+        media_loc = 'media/' + str(img_loc)
+
+        output_data = inference.inference(media_loc)
         
-        InputModel.objects.create
-        '''
+        print(output_data['species'], output_data['breed'])
+
     return redirect('/output')
 
 
@@ -28,10 +34,10 @@ def output(request):
         '''
         InputModel id로 받아오기
         '''        
-        
-        return render(request, 'output.html', {'img_data':img_data, 'species':species, 'breed':breed, 'search_link':search_link})
+        #{'img_data':img_data, 'species':species, 'breed':breed, 'search_link':search_link}
+        return render(request, 'output.html')
     
-    elif
+    
 
 
 def if_wrong(request):

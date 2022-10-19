@@ -10,15 +10,12 @@ from django.views.generic import ListView, TemplateView
 
 
 
-def inference(request):
+def inference(img):
     model = torch.hub.load('ultralytics/yolov5', 'custom', path='models_train/best.pt', force_reload=True)  # 커스텀 학습 모델 사용
     
-    imgfile = request.files['file']
     
+    img = Image.open(img)
     
-    im_bytes = imgfile.read()
-    
-    img = Image.open(io.BytesIO(im_bytes))
 
     results = model(img, size=640)  # inference 추론
     result = results.pandas().xyxy[0].to_numpy()  # 종-품명 추출하기 위해 numpy array
@@ -43,7 +40,7 @@ def inference(request):
         'breed' : breed,
         'search_link' : search_link,
         }
-        
+    
     return outputs_data
 
     
