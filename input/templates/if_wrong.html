@@ -17,6 +17,8 @@
 
     body {
         display: flex;
+        height: 100vh;
+        width: 100vw;
         justify-content: center;
         flex-wrap: nowrap;
         align-items: center;
@@ -24,9 +26,6 @@
         background: #EFDEEE;
     }
     main {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
         background-color: white;
         width: 800px;
@@ -47,7 +46,7 @@
         width: auto;
         height: auto;
         text-align:center;
-        padding: 20px;
+        padding: 10px;
 
     }
 
@@ -111,6 +110,20 @@
     .text_info{
 
     }
+    .show_none{
+        text-align:center;
+        padding: 20px;
+        border: dotted 5px;
+        
+    }
+
+    .show_none h4{
+        margin-bottom:20px;
+    }
+
+    h6{
+        font-weight: bold;
+    }
     
 
     
@@ -129,55 +142,86 @@
     <main>
         <div class="container">
             {% if not name %}
+                <section>
+                    <h2>Search Pet</h2>
+                        <form method="POST" active="/wrong/">
+                            {% csrf_token %}
+                            <div class="wrap" style="border:1px solid black">
+                                <div class="search">
+                                <input type="text" class="searchTerm" placeholder="What are you looking for?" name="search">
+                                <button type="submit" class="searchButton">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                </div>
+                            </div>
+                            <hr>
+                            
+                        </form>
+                </section>
+                
+                
+                </div>
+                <h4 class="btn-select">찾으셨던 pet 종을 입력하고 버튼을 눌러주세요</h4>
+                <div class="btn-select">
+                    <h6>정확도 확인하기</h6>
+                    <button type="button" class="btn btn-outline-info" onClick="location.href='/graph';">확인</button>
+                </div>
+        
+            {% elif name and none == False %}
+                <img src="{{ img }}" class="post-image" alt="이미지 없음">
+            
+                <section style="padding:30px">
+                    <h2>검색 내용</h2>
+                    <hr>
+                    
+                    <h4>{{ name }}</h4>
+                    <div class="search_info">
+                        
+                        <div class="text_info">
+                            {% for data in info %}
+                            <p>{{ data }}</p>
+                            {% endfor %}
+                        
+                        
+                            <p>내용 : {{ text }}</p>
+                        </div>
+                    </div>
+                </section>
+                <div class="btn-select">
+                    <h6>정확도 확인하기</h6>
+                    <button type="button" class="btn btn-outline-info" onClick="location.href='/graph';">확인</button>
+                </div>
+            
+            {% elif name and none == True %}
             <section>
                 <h2>Search Pet</h2>
                     <form method="POST" active="/wrong/">
                         {% csrf_token %}
                         <div class="wrap" style="border:1px solid black">
                             <div class="search">
-                               <input type="text" class="searchTerm" placeholder="What are you looking for?" name="search">
-                               <button type="submit" class="searchButton">
-                                 <i class="fa fa-search"></i>
-                              </button>
+                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="search">
+                            <button type="submit" class="searchButton">
+                                <i class="fa fa-search"></i>
+                            </button>
                             </div>
                         </div>
                         <hr>
+                        <div class="show_none">
+                            <h4>해당 검색은 현재 데이터가 없습니다.</h4>
+                            <p>구글 검색 결과 보기. <a href = "{{ url }}" target="_blank"> {{ name }} </a></p>
+                            
+                        </div>
+                        <div class="btn-select">
+                            <h6>정확도 확인하기</h6>
+                            <button type="button" class="btn btn-outline-info" onClick="location.href='/graph';">확인</button>
+                        </div>
+                        
                         
                     </form>
             </section>
-            {% endif %}
-            
-        </div>
-        {% if name %}
-            <img src="{{ img }}" class="post-image" alt="이미지 없음">
-        {% else %}
-            <div class="btn-select">찾으셨던 pet 종을 입력하고 버튼을 눌러주세요</div>
-        {% endif %}
 
-        {% if name%}
-        <section style="padding:30px">
-            <h2>검색 내용</h2>
-            <hr>
             
-                <h4>{{ name }}</h4>
-                <div class="search_info">
-                    
-                    <div class="text_info">
-                        {% for data in info %}
-                        <p>{{ data }}</p>
-                        {% endfor %}
-                    
-                    
-                        <p>내용 : {{ text }}</p>
-                    </div>
-                </div>
-            </section>
             {% endif %}
-            <div class="btn-select">
-                <h4>정확도 확인하기</h4>
-                <button type="button" class="btn btn-outline-info" onClick="location.href='/graph';">확인</button>
-            </div>
-        
 
     </main>
    
