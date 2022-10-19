@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-
+from django_base64field.fields import Base64Field
 # Create your models here.
 
 # 이미지 파일 업로드 모델
@@ -11,13 +11,13 @@ class InputModel(models.Model):
     # 품종이름
     pet = models.CharField(max_length=20)
     
-    img_data = models.CharField('')
+    img_data = Base64Field(max_length=900000, blank=True, null=True)
     # 사물인식 파일(base64 인코딩)
-    species = models.CharField('')
+    species = models.CharField(max_length=20, blank=True, null=True)
     # 종
-    breed = models.CharField('')
+    breed = models.CharField(max_length=20, blank=True, null=True)
     # 품종
-    search_link = models.CharField('')
+    search_link = models.CharField(max_length=20, blank=True, null=True)
     # 서치링크
    
 
