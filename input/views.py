@@ -57,5 +57,11 @@ def if_wrong(request):
 
 def graph(request):
     if request.method == 'GET':
-        ResearchModel.objects.create(correct=True)
-        return render(request, 'accuracy_graph.html',{'data':30})
+        yes = ResearchModel.objects.filter(correct=1).count()
+        total = ResearchModel.objects.all().count()
+        percent = int((yes/total)*100)
+
+        print(percent)
+
+    
+        return render(request, 'accuracy_graph.html',{'data':percent})
