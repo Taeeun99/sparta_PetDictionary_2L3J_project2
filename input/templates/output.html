@@ -104,7 +104,12 @@
         object-fit: cover;
     }
 
-    
+    .informations {
+        background-color: #E2E2E2; 
+        padding:10px; 
+        margin-bottom:10px;  
+        border-radius: 10px;
+    }
 
     
     
@@ -120,21 +125,28 @@
 <body>
     <main>
 
-        <h2>검색하신 {{ species }}은 {{ breed }}입니다.</h2>
+        <h2>검색하신 {{ species_ko }}는 {{ breed }}입니다.</h2>
         <input id="toggle" type="checkbox" checked>
 
         
         <img src="data:image/jpeg;base64,{{ img_data }}" class="post-image" alt="">
         <section>
-          <h3>검색 결과</h3>
-          <hr>
-          <div style="background-color: F0F0F0;">
-            {% for data in info %}
-            <p>{{ data }}</p>
-            {% endfor %}
-          </div>
-            {{ text }}
-          <a href="{{ search_link }}">자세히 보기</a>
+          <h3 style="margin-top:20px;">검색 결과</h3>
+          {% if context.info %}
+            <div class="informations">
+                {% for data in context.info %}
+                {{ data }}</br>
+                {% endfor %}
+            </div>
+            내용: {{ context.text }}
+          {% endif %}
+            {% if context.none == True %}
+            <div class="informations" style="text-align:center;">
+                <h4>해당 검색은 현재 데이터가 없습니다.</h4>
+                <span onclick="location.href='{{ context.url }}'" style="">구글 검색 결과 보기.</span>
+            </div>
+            {% endif %}
+            
         </section>
 
 

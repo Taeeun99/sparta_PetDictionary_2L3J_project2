@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import search, inference
 from .models import InputModel, ResearchModel
+from googletrans import Translator
 
 
 # Create your views here.
@@ -40,18 +41,23 @@ def output(request, id):
         breed = my_pet.breed
         search_link = my_pet.search_link
         img_data = my_pet.img_data
+       
+        trans = Translator() 
+        result = trans.translate(species, src='en', dest='ko')
+        species_ko = result.text
 
         search_data = f'{breed} {species}'    
-        context = search.serch_cat(search_data)        
-        
+        context = search.serch_cat(search_data) 
+       
         info = {
-            'species':species,
+            'species_ko':species_ko,
             'breed':breed,
             'search_link':search_link,
             'img_data':img_data,
             'context':context,
             'id':id,
         }
+
         return render(request, 'output.html', info)
 
     elif request.method == 'POST':
