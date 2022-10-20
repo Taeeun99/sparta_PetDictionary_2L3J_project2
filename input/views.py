@@ -56,8 +56,11 @@ def output(request, id):
         result = trans.translate(species, src='en', dest='ko')
         species_ko = result.text
 
-        search_data = f'{breed} {species}'    
+        search_data = f'{breed}'
         context = search.serch_cat(search_data) 
+        if context['none']== True:
+            search_data = f'{breed} {species}'
+            context = search.serch_cat(search_data)  
        
         info = {
             'species_ko':species_ko,
