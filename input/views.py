@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import search, inference
-from .models import InputModel
+from .models import InputModel, Image
 from googletrans import Translator
 
 
@@ -18,9 +18,10 @@ def input(request):
     elif request.method == 'POST':
         img = request.FILES.get("imgfile")
         if img: 
-            my_search = InputModel.objects.create(imgfile=img)
+            giveimage = Image.objects.create(imgfile=img)
+
             
-            img_loc = my_search.imgfile
+            img_loc = giveimage.imgfile
             media_loc = 'media/' + str(img_loc)
             output_data = inference.inference(media_loc)
 
@@ -28,12 +29,13 @@ def input(request):
                 return render(request, 'input.html',{'error' : '이미지 인식 오류, 이미지를 다시 등록해주세요'})
 
         #모델 저장
+            my_search = InputModel()
             my_search.img_data = output_data['img_data']
             my_search.species = output_data['species']
             my_search.breed = output_data['breed']
             my_search.search_link = output_data['search_link']
             my_search.save()
-
+       
             return redirect(f'/output/{my_search.id}')
         else:
             return render(request, 'input.html',{'error' : '이미지가 등록되지 않았습니다'})
