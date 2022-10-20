@@ -116,6 +116,6 @@ https://universe.roboflow.com/brad-dwyer/oxford-pets
 
 
 ### 시연영상
-영상링크 추가 예정
+https://youtu.be/VwNDAqxsitc
 
 
