@@ -19,7 +19,6 @@ def input(request):
         img = request.FILES.get("imgfile")
         if img: 
             my_search = InputModel.objects.create(imgfile=img)
-            my_search.save()
             
             img_loc = my_search.imgfile
             media_loc = 'media/' + str(img_loc)
