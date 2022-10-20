@@ -104,7 +104,12 @@
         object-fit: cover;
     }
 
-    
+    .informations {
+        background-color: #E2E2E2; 
+        padding:10px; 
+        margin-bottom:10px;  
+        border-radius: 10px;
+    }
 
     
     
@@ -120,27 +125,42 @@
 <body>
     <main>
 
-        <h2>검색하신 {{ species }}은 {{ breed }}입니다.</h2>
+        <h2>검색하신 {{ species_ko }}는 {{ breed }}입니다.</h2>
         <input id="toggle" type="checkbox" checked>
 
         
         <img src="data:image/jpeg;base64,{{ img_data }}" class="post-image" alt="">
         <section>
-          <h3>관련 내용</h3>
-          <a href="{{ search_link }}">Google 검색 결과</a>
-          <p>Aliquam ligula est, aliquet et semper vitae, elementum eget dolor. In ut dui id leo tristique iaculis eget a dui. Vestibulum cursus, dolor sit amet lacinia feugiat, turpis odio auctor nisi, quis pretium dui elit at est. Pellentesque lacus risus, vulputate sed gravida eleifend, accumsan ac ante. Donec accumsan, augue eu congue condimentum, erat magna luctus diam, adipiscing bibendum sem sem non elit.</p>
+          <h3 style="margin-top:20px;">검색 결과</h3>
+          {% if context.info %}
+            <div class="informations">
+                {% for data in context.info %}
+                {{ data }}</br>
+                {% endfor %}
+            </div>
+            내용: {{ context.text }}
+          {% endif %}
+            {% if context.none == True %}
+            <div class="informations" style="text-align:center;">
+                <h4>해당 검색은 현재 데이터가 없습니다.</h4>
+                <span onclick="location.href='{{ context.url }}'" style="">구글 검색 결과 보기.</span>
+            </div>
+            {% endif %}
+            
         </section>
 
-        <div class="btn-select">
-            <h4>원하시는 품종이 맞으신가요?</h4>
-                <button type="button" class="btn btn-success" onClick="location.href='/graph/';">예</button>
-                <button type="button" class="btn btn-danger" onClick="location.href='/wrong/';">아니요</button>
-        </div>
-        
-          
-      </main>
-      
-</body>
 
+        <form action="{% url 'input:output' id %}" method="POST">
+            {% csrf_token %}
+            <div class="btn-select">
+                <h4>원하시는 품종이 맞으신가요?</h4>
+                    <button type="submit" class="btn btn-success" value="yes" name="result">예</button>
+                    <button type="submit" class="btn btn-danger" value="no" name="result">아니요</button>
+            </div>
+        </form>
+        
+    </main>
+
+</body>
 
 </html>

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import search, inference
 from .models import InputModel, ResearchModel
+from googletrans import Translator
 
 
 # Create your views here.
@@ -22,25 +23,58 @@ def input(request):
         img_loc = my_search.imgfile
         media_loc = 'media/' + str(img_loc)
         output_data = inference.inference(media_loc)
-        #모델 저장
+
+        
+       #모델 저장
         my_search.img_data = output_data['img_data']
         my_search.species = output_data['species']
         my_search.breed = output_data['breed']
         my_search.search_link = output_data['search_link']
         my_search.save()
-       
-    return render(request, 'output.html', output_data) 
+
+        return redirect(f'/output/{my_search.id}')
 
 
-def output(request):
+
+def output(request, id):
     if request.method == 'GET':
-        '''
-        InputModel id로 받아오기
-        '''        
-        #{'img_data':img_data, 'species':species, 'breed':breed, 'search_link':search_link}
-        return redirect('/output')
-    
-    
+        
+        my_pet = InputModel.objects.get(id=id)
+        
+        species = my_pet.species
+        breed = my_pet.breed
+        search_link = my_pet.search_link
+        img_data = my_pet.img_data
+       
+        trans = Translator() 
+        result = trans.translate(species, src='en', dest='ko')
+        species_ko = result.text
+
+        search_data = f'{breed} {species}'    
+        context = search.serch_cat(search_data) 
+       
+        info = {
+            'species_ko':species_ko,
+            'breed':breed,
+            'search_link':search_link,
+            'img_data':img_data,
+            'context':context,
+            'id':id,
+        }
+
+        return render(request, 'output.html', info)
+
+    elif request.method == 'POST':
+        
+        result = request.POST.get('result') # 검색 정확도 설문 결과
+        if result == 'yes':
+             ResearchModel.objects.create(correct=True)
+             return redirect('/graph')
+        
+        elif result == 'no':
+             ResearchModel.objects.create(correct=False)
+             return redirect('/wrong') 
+
 
 
 def if_wrong(request):

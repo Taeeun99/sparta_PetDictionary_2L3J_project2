@@ -8,16 +8,14 @@ from django_base64field.fields import Base64Field
 class InputModel(models.Model):
     # 이미지 파일 업로드
     imgfile = models.ImageField(null=False, upload_to="input/", blank=False)
-    # 품종이름
-    pet = models.CharField(max_length=20)
-    
+    # 품종이름   
     img_data = Base64Field(max_length=900000, blank=True, null=True)
     # 사물인식 파일(base64 인코딩)
     species = models.CharField(max_length=20, blank=True, null=True)
     # 종
     breed = models.CharField(max_length=20, blank=True, null=True)
     # 품종
-    search_link = models.CharField(max_length=20, blank=True, null=True)
+    search_link = models.CharField(max_length=500, blank=True, null=True)
     # 서치링크
    
 

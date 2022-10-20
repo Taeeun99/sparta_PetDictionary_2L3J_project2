@@ -7,7 +7,7 @@ def serch_cat(name):
     search = name
     url = 'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query='
     newUrl = url + quote_plus(search) +'%20기본정보'
-
+    
     headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
 
     data = requests.get(newUrl,headers=headers)
@@ -20,7 +20,7 @@ def serch_cat(name):
 
     imgs = soup.select('#main_pack > div.sc_new.cs_common_module.case_normal.color_15._pet > div.cm_content_wrap > div > div > div.detail_info > span')
 
-    if not datas or not infos or not imgs:
+    if not datas or not infos or not imgs:  
         search = name
         url = 'https://www.google.com/search?q='
         newUrl = url + quote_plus(search)
@@ -29,7 +29,7 @@ def serch_cat(name):
             'name' : name,
             'url' : newUrl,
         }
-
+        
         return output_data
 
     else:
@@ -53,4 +53,5 @@ def serch_cat(name):
             'text' : text,
             'img' : img_src,
         }
+        
         return output_data
