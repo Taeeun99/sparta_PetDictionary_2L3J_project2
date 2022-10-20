@@ -17,7 +17,7 @@ def inference(img):
 
     results = model(img, size=640)  # inference 추론
     result = results.pandas().xyxy[0].to_numpy()  # 종-품명 추출하기 위해 numpy array
-    if result == []:
+    if result != []:
         keyword = result[0][6]
         search_link = "https://www.google.com/search?q="+keyword
         species = keyword[:3]  # 종
