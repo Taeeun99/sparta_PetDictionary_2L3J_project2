@@ -24,6 +24,7 @@ def inference(img):
         search_link = "https://www.google.com/search?q="+keyword
         species = keyword[:3]  # 종
         breed = keyword[4:]  # 품명
+        breed = breed.replace('_'," ")
         results.ims  # array of original images (as np array) passed to model for inference 원본 이미지(np 배열) 추론모델로 보내기
         results.render()  # updates results.imgs with boxes and labels  이미지에 박스와 라벨 붙이기
         for img in results.ims:  # 'JpegImageFile' -> bytes-like object
