@@ -59,9 +59,9 @@ def graph(request):
     if request.method == 'GET':
         yes = ResearchModel.objects.filter(correct=1).count()
         total = ResearchModel.objects.all().count()
-        percent = int((yes/total)*100)
-        if yes == 0 :
-            total == 0
-            return render(request, 'accuracy_graph.html',{'data':0})
+        if total == 0 :
+            percent = 0
+        else:
+            percent = int((yes/total)*100)
         
         return render(request, 'accuracy_graph.html',{'data':percent})
