@@ -5,9 +5,13 @@ from django_base64field.fields import Base64Field
 # Create your models here.
 
 # 이미지 파일 업로드 모델
-class InputModel(models.Model):
+
+class Image(models.Model):
     # 이미지 파일 업로드
     imgfile = models.ImageField(null=False, upload_to="input/", blank=False)
+    
+    
+class InputModel(models.Model):
     # 품종이름   
     img_data = Base64Field(max_length=900000, blank=True, null=True)
     # 사물인식 파일(base64 인코딩)
