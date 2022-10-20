@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import search, inference
-from .models import InputModel, ResearchModel
+from .models import InputModel
 from googletrans import Translator
 
 
@@ -42,9 +42,10 @@ def input(request):
 
 
 def output(request, id):
+    my_pet = InputModel.objects.get(id=id)
+
     if request.method == 'GET':
         
-        my_pet = InputModel.objects.get(id=id)
         
         species = my_pet.species
         breed = my_pet.breed
@@ -73,12 +74,14 @@ def output(request, id):
         id=id
         result = request.POST.get('result') # 검색 정확도 설문 결과
         if result == 'yes':
-             ResearchModel.objects.create(correct=True)
+             my_pet.correct = True
+             my_pet.save()
              return redirect('/graph')
         
         elif result == 'no':
-             ResearchModel.objects.create(correct=False)
-             return redirect(f'/wrong/{id}') 
+            my_pet.correct = False
+            my_pet.save()
+            return redirect(f'/wrong/{id}') 
 
 
 def if_wrong(request, id):
@@ -88,11 +91,9 @@ def if_wrong(request, id):
         context=search.serch_cat(search_data)
 
         my_pet = InputModel.objects.get(id=id)
-        re_search = ResearchModel.objects.get(id=id)
        
-        re_search.pet_result = search_data   # 재검색 시 사용한 keyword
-        re_search.breed = my_pet   # 기존 이미지 검색의 결과값
-        re_search.save()   # 재검색 결과를 DB에 저장
+        my_pet.pet_result = search_data   # 재검색 시 사용한 keyword
+        my_pet.save()   # 재검색 결과를 DB에 저장
 
         return render(request, 'if_wrong.html', context)
 
@@ -106,8 +107,8 @@ def if_wrong(request, id):
 def graph(request):
     if request.method == 'GET':
 
-        yes = ResearchModel.objects.filter(correct=1).count()
-        total = ResearchModel.objects.all().count()
+        yes = InputModel.objects.filter(correct=1).count()
+        total = InputModel.objects.all().count()
         if total == 0 :
             percent = 0
         else:
