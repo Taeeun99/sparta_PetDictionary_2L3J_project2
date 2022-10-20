@@ -78,12 +78,22 @@
         width:90%;
         text-align:center;
     }
+    #back{    
+        position: absolute;    
+        z-index: 100;    
+        background-color: #000000;    
+        display:none;    
+        left:0;    
+        top:0;
+    } 
+    #loadingBar{    
+        position:absolute;    
+        left:50%;    
+        top: 40%;    
+        display:none;    
+        z-index:200;
+    }
 
-   
-      
-    
-
-      
 </style>
 
 <script>
@@ -98,7 +108,20 @@
           document.getElementById('preview').src = "";
         }
     }
-    
+    function FunLoadingBarStart() {    
+        var backHeight = $(document).height();               	//뒷 배경의 상하 폭    
+        var backWidth = window.document.body.clientWidth;		//뒷 배경의 좌우 폭     
+        var backGroundCover = "<div id='back'></div>";			//뒷 배경을 감쌀 커버    
+        var loadingBarImage = '';								//가운데 띄워 줄 이미지     
+        loadingBarImage += "<div id='loadingBar'>";    
+        loadingBarImage += "<div class='spinner-border text-info' role='status'>"; //로딩 바 이미지    
+        loadingBarImage += "<span class='visually-hidden'>Loading...</span>";
+        loadingBarImage += "</div>";
+        loadingBarImage += "</div>";     
+        $('body').append(backGroundCover).append(loadingBarImage);      
+        $('#back').css({ 'width': backWidth, 'height': backHeight, 'opacity': '0.3' });    
+        $('#back').show();     
+        $('#loadingBar').show();}
 </script>
 
 
@@ -120,7 +143,7 @@
                     <div class="mb-3">
                         <input class="form-control" accept='image/*' type="file" onchange="readURL(this);" name="imgfile">                   
                     </div>
-                    <button type="submit" class="btn btn-outline-secondary">확인하기</button>
+                    <button type="submit" class="btn btn-outline-secondary" onclick="FunLoadingBarStart()">확인하기</button>
 
                 </form>
         </section>
