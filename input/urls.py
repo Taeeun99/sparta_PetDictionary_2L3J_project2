@@ -6,7 +6,7 @@ app_name = 'input'
 
 urlpatterns = [
     
-    path('main/', views.main, name='main'),
+    path('', views.main, name='main'),
     path('input/', views.input, name='input'),
     path('output/<int:id>/', views.output, name='output'),
     path('wrong/', views.if_wrong, name='wrong'),
