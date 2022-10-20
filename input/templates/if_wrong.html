@@ -102,11 +102,7 @@
         font-weight: bold;
     }
 
-    .search_info{
-        margin-top:20px;
-        padding:20px;
-        border: dotted 5px;
-    }
+    
     .text_info{
 
     }
@@ -125,6 +121,12 @@
         font-weight: bold;
     }
     
+    .informations {
+        background-color: #E2E2E2; 
+        padding:10px; 
+        margin-bottom:10px;  
+        border-radius: 10px;
+    }
 
     
     
@@ -171,20 +173,17 @@
                 <img src="{{ img }}" class="post-image" alt="이미지 없음">
             
                 <section style="padding:30px">
-                    <h2>검색 내용</h2>
+                    <h4 style="text-align:center;">{{ name }}</h4>
                     <hr>
-                    
-                    <h4>{{ name }}</h4>
+                    <h3 style="margin-top:20px;">검색 결과</h3>
                     <div class="search_info">
                         
-                        <div class="text_info">
+                        <div class="informations">
                             {% for data in info %}
-                            <p>{{ data }}</p>
-                            {% endfor %}
-                        
-                        
-                            <p>내용 : {{ text }}</p>
+                            {{ data }}</br>
+                            {% endfor %}          
                         </div>
+                        내용 : {{ text }}
                     </div>
                 </section>
                 <div class="btn-select">

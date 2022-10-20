@@ -17,22 +17,27 @@ def input(request):
     
     elif request.method == 'POST':
         img = request.FILES.get("imgfile")
-        my_search = InputModel.objects.create(imgfile=img)
-        my_search.save()
-        
-        img_loc = my_search.imgfile
-        media_loc = 'media/' + str(img_loc)
-        output_data = inference.inference(media_loc)
+        if img: 
+            my_search = InputModel.objects.create(imgfile=img)
+            my_search.save()
+            
+            img_loc = my_search.imgfile
+            media_loc = 'media/' + str(img_loc)
+            output_data = inference.inference(media_loc)
 
-        
-       #모델 저장
-        my_search.img_data = output_data['img_data']
-        my_search.species = output_data['species']
-        my_search.breed = output_data['breed']
-        my_search.search_link = output_data['search_link']
-        my_search.save()
+            if output_data==1:
+                return render(request, 'input.html',{'error' : '이미지 인식 오류, 이미지를 다시 등록해주세요'})
 
-        return redirect(f'/output/{my_search.id}')
+        #모델 저장
+            my_search.img_data = output_data['img_data']
+            my_search.species = output_data['species']
+            my_search.breed = output_data['breed']
+            my_search.search_link = output_data['search_link']
+            my_search.save()
+
+            return redirect(f'/output/{my_search.id}')
+        else:
+            return render(request, 'input.html',{'error' : '이미지가 등록되지 않았습니다'})
 
 
 

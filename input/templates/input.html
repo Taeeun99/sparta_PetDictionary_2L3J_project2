@@ -73,6 +73,12 @@
         height: 500px;
     }
 
+    .error-text{
+        max-width: 50em;
+        width:90%;
+        text-align:center;
+    }
+
    
       
     
@@ -91,9 +97,8 @@
         } else {
           document.getElementById('preview').src = "";
         }
-      }
+    }
     
-   
 </script>
 
 
@@ -119,6 +124,12 @@
 
                 </form>
         </section>
+        {% if error %}
+            <div class="alert alert-danger error-text" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        
         <img id="preview" class="image_container">
     </div>
     
