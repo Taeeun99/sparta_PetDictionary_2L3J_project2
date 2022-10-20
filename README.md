@@ -88,7 +88,7 @@
 
 
 
-### 주요 기능 
+### 주요 기능 <a href="https://github.com/Taeeun99/sparta_PetDictionary_2L3J_project2/wiki/2.-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C" >(상세보기)</a>
 
 - #### 동물의 종 인식
   - 업로드된 동물 이미지의 종을 판단
