@@ -65,7 +65,7 @@ def output(request, id):
         return render(request, 'output.html', info)
 
     elif request.method == 'POST':
-        
+        id=id
         result = request.POST.get('result') # 검색 정확도 설문 결과
         if result == 'yes':
              ResearchModel.objects.create(correct=True)
@@ -73,20 +73,26 @@ def output(request, id):
         
         elif result == 'no':
              ResearchModel.objects.create(correct=False)
-             return redirect('/wrong') 
+             return redirect(f'/wrong/{id}') 
 
 
-
-def if_wrong(request):
-    
+def if_wrong(request, id):
     
     if request.method == 'POST':
         search_data = request.POST.get("search")
         context=search.serch_cat(search_data)
+
+        my_pet = InputModel.objects.get(id=id)
+        re_search = ResearchModel.objects.get(id=id)
+       
+        re_search.pet_result = search_data   # 재검색 시 사용한 keyword
+        re_search.breed = my_pet   # 기존 이미지 검색의 결과값
+        re_search.save()   # 재검색 결과를 DB에 저장
+
         return render(request, 'if_wrong.html', context)
 
     elif request.method == 'GET':
-        return render(request, 'if_wrong.html')
+        return render(request, 'if_wrong.html', {'id':id})
 
   
 

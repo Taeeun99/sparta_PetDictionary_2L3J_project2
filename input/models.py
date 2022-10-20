@@ -21,12 +21,11 @@ class InputModel(models.Model):
 
 class ResearchModel(models.Model):
     # 정확도
-
     correct = models.BooleanField(default=False)
     # 검색된 품종 이름
     pet_result = models.CharField(max_length=20)
-    # 품종이름이 다를때
-    pet_def = models.CharField(max_length=20)
+    # 품종이름이 다를때 (기존 이미지 분석의 결과값)
+    breed = models.ForeignKey(InputModel,on_delete=models.CASCADE, null=True)
 
 
     
