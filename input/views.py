@@ -60,8 +60,8 @@ def graph(request):
         yes = ResearchModel.objects.filter(correct=1).count()
         total = ResearchModel.objects.all().count()
         percent = int((yes/total)*100)
-
-        print(percent)
-
-    
+        if yes == 0 :
+            total == 0
+            return render(request, 'accuracy_graph.html',{'data':0})
+        
         return render(request, 'accuracy_graph.html',{'data':percent})
