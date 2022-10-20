@@ -19,6 +19,7 @@ def input(request):
         img = request.FILES.get("imgfile")
         if img: 
             giveimage = Image.objects.create(imgfile=img)
+
             
             img_loc = giveimage.imgfile
             media_loc = 'media/' + str(img_loc)
