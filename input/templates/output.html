@@ -147,7 +147,7 @@
             {% if context.none == True %}
             <div class="informations" style="text-align:center;">
                 <h4>해당 검색은 현재 데이터가 없습니다.</h4>    
-                <span style="cursor: pointer;"  onclick="window.open('{{ context.url }}', 'window_name', 'width=1200, height=600, location=no, status=no, scrollbars=yes');" >구글 검색 결과 보기.</span>
+                <p>구글 검색 결과 보기. <span style="cursor: pointer; color: blue;"  onclick="window.open('{{ context.url }}', 'window_name', 'width=1200, height=800, location=no, status=no, scrollbars=yes');" >{{ breed }}</span></p>
             </div>
             {% endif %}
             
